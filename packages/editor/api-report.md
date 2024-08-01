@@ -799,6 +799,10 @@ export class EdgeScrollManager {
 export class Editor extends EventEmitter<TLEventMap> {
     constructor({ store, user, shapeUtils, bindingUtils, tools, getContainer, cameraOptions, initialState, autoFocus, inferDarkMode, options, }: TLEditorOptions);
     addOpenMenu(id: string): this;
+    addStateToUrl(opts?: {
+        paramNames?: TLUrlStateParams;
+        url?: string | URL;
+    }): URL;
     alignShapes(shapes: TLShape[] | TLShapeId[], operation: 'bottom' | 'center-horizontal' | 'center-vertical' | 'left' | 'right' | 'top'): this;
     animateShape(partial: null | TLShapePartial | undefined, opts?: Partial<{
         animation: Partial<{
@@ -1134,6 +1138,10 @@ export class Editor extends EventEmitter<TLEventMap> {
     // (undocumented)
     isShapeOrAncestorLocked(id?: TLShapeId): boolean;
     loadSnapshot(snapshot: Partial<TLEditorSnapshot> | TLStoreSnapshot): this;
+    loadStateFromUrl(opts?: {
+        paramNames?: TLUrlStateParams;
+        url?: string | URL;
+    }): Editor;
     // @deprecated
     mark(markId?: string): this;
     markHistoryStoppingPoint(name?: string): string;
@@ -3348,6 +3356,14 @@ export interface TLTickEventInfo {
     name: 'tick';
     // (undocumented)
     type: 'misc';
+}
+
+// @public (undocumented)
+export interface TLUrlStateParams {
+    // (undocumented)
+    page?: null | string;
+    // (undocumented)
+    viewport?: null | string;
 }
 
 // @public (undocumented)
